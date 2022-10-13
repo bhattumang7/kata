@@ -26,7 +26,7 @@ public class JavaAnalyzer implements Analyzer {
         String line;
         while ((line = reader.readLine()) != null) {
           lineOfCode += 1;
-          if (line.trim().startsWith("import")) {
+          if (isAnImportLine(line)) {
             imports += 1;
           } else if (isCommentLine(line)) {
             commentsLoC += 1;
@@ -40,6 +40,10 @@ public class JavaAnalyzer implements Analyzer {
     } else {
       return null;
     }
+  }
+
+  private static boolean isAnImportLine(String line) {
+    return line.trim().startsWith("import");
   }
 
   private static boolean isCommentLine(String line) {
