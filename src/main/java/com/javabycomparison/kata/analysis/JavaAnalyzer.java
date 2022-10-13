@@ -13,6 +13,16 @@ public class JavaAnalyzer implements Analyzer {
     this.file = file;
   }
 
+  private static boolean isAnImportLine(String line) {
+    return line.trim().startsWith("import");
+  }
+
+  private static boolean isCommentLine(String line) {
+    return line.trim().startsWith("//")
+        || line.trim().startsWith("*")
+        || line.trim().startsWith("/*");
+  }
+
   @Override
   public ResultData analyze() throws IOException {
     if (file != null) {
@@ -33,22 +43,13 @@ public class JavaAnalyzer implements Analyzer {
           }
         }
         // It is impossible to detect the number of methods at the moment.
-        return new ResultData(0, this.file.toString(), lineOfCode, commentsLoC, 0, imports);
+        return new ResultData(
+            Language.JAVA.getNumVal(), this.file.toString(), lineOfCode, commentsLoC, 0, imports);
       } catch (IOException ioe) {
         throw new IOException("There was a problem reading a file!");
       }
     } else {
       return null;
     }
-  }
-
-  private static boolean isAnImportLine(String line) {
-    return line.trim().startsWith("import");
-  }
-
-  private static boolean isCommentLine(String line) {
-    return line.trim().startsWith("//")
-        || line.trim().startsWith("*")
-        || line.trim().startsWith("/*");
   }
 }
