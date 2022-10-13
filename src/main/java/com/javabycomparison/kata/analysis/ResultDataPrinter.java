@@ -4,15 +4,21 @@ import java.util.Collections;
 
 public class ResultDataPrinter {
 
-  public String print(ResultData data) {
+  private static String getLanguage(ResultData data) {
     String language;
-    if (data.type == 0) {
+    if (data.type == Language.JAVA.getNumVal()) {
       language = "Java";
-    } else if (data.type == 1) {
+    } else if (data.type == Language.PYTHON.getNumVal()) {
       language = "Python";
     } else {
       language = "other";
     }
+    return language;
+  }
+
+  public String print(ResultData data) {
+    String language;
+    language = getLanguage(data);
     return data.name
         + "\t"
         + language
@@ -34,14 +40,7 @@ public class ResultDataPrinter {
   }
 
   public String printLanguage(ResultData data, int length) {
-    String language;
-    if (data.type == 0) {
-      language = "Java";
-    } else if (data.type == 1) {
-      language = "Python";
-    } else {
-      language = "other";
-    }
+    String language = getLanguage(data);
     return String.join("", Collections.nCopies(Math.max(length - language.length(), 0), " "))
         + language;
   }
