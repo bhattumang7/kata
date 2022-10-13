@@ -20,19 +20,18 @@ public class ResultData {
     this.nImports = nImports;
   }
 
-  /*
-  public ResultData(boolean java){
-      this.javaFile = java;
-
+  public ResultData() {
   }
-  */
-  public ResultData() {}
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
+    if (this == o) {
+      return true;
+    }
 
-    if (o == null || getClass() != o.getClass()) return false;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     ResultData that = (ResultData) o;
     return type == that.type
         && L == that.L
