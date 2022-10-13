@@ -47,7 +47,7 @@ public class PythonAnalyzer implements Analyzer {
     }
 
     return new ResultData(
-        1,
+        Language.JAVA.getNumVal(),
         this.file.toString(),
         lines_of_code,
         comment_lines_of_code,
