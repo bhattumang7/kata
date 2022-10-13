@@ -3,6 +3,7 @@ package com.javabycomparison.kata.analysis;
 import java.util.StringJoiner;
 
 public class ResultData {
+
   public int type;
   public String name;
   public int L;
@@ -22,7 +23,7 @@ public class ResultData {
 
   public ResultData() {}
 
-  public boolean equals(ResultData otherObject) {
+  public boolean areInstanceMemberSame(ResultData otherObject) {
     return type == otherObject.type
         && L == otherObject.L
         && LOC == otherObject.LOC
@@ -42,7 +43,7 @@ public class ResultData {
       return false;
     }
     ResultData that = (ResultData) o;
-    return this.equals(that);
+    return this.areInstanceMemberSame(that);
   }
 
   @Override
