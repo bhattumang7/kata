@@ -17,7 +17,7 @@ public class JavaAnalyzer implements Analyzer {
   public ResultData analyze() throws IOException {
     if (file != null) {
       int imports = 0;
-      int LoC = 0;
+      int lineOfCode = 0;
       int commentsLoC = 0;
 
       try {
@@ -25,7 +25,7 @@ public class JavaAnalyzer implements Analyzer {
 
         String line;
         while ((line = reader.readLine()) != null) {
-          LoC += 1;
+          lineOfCode += 1;
           if (line.trim().startsWith("import")) {
             imports += 1;
           } else if (isCommentLine(line)) {
@@ -33,7 +33,7 @@ public class JavaAnalyzer implements Analyzer {
           }
         }
         // It is impossible to detect the number of methods at the moment.
-        return new ResultData(0, this.file.toString(), LoC, commentsLoC, 0, imports);
+        return new ResultData(0, this.file.toString(), lineOfCode, commentsLoC, 0, imports);
       } catch (IOException ioe) {
         throw new IOException("There was a problem reading a file!");
       }
