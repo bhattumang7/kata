@@ -6,9 +6,13 @@ public class ResultDataPrinter {
 
   public String print(ResultData data) {
     String language;
-    if (data.type == 0) language = "Java";
-    else if (data.type == 1) language = "Python";
-    else language = "other";
+    if (data.type == 0) {
+      language = "Java";
+    } else if (data.type == 1) {
+      language = "Python";
+    } else {
+      language = "other";
+    }
     return data.name
         + "\t"
         + language
@@ -31,38 +35,42 @@ public class ResultDataPrinter {
 
   public String printLanguage(ResultData data, int length) {
     String language;
-    if (data.type == 0) language = "Java";
-    else if (data.type == 1) language = "Python";
-    else language = "other";
+    if (data.type == 0) {
+      language = "Java";
+    } else if (data.type == 1) {
+      language = "Python";
+    } else {
+      language = "other";
+    }
     return String.join("", Collections.nCopies(Math.max(length - language.length(), 0), " "))
         + language;
   }
 
   public String printLOC(ResultData data, int length) {
     return String.join(
-            "", Collections.nCopies(Math.max(length - String.valueOf(data.LOC).length(), 0), " "))
+        "", Collections.nCopies(Math.max(length - String.valueOf(data.LOC).length(), 0), " "))
         + data.LOC;
   }
 
   public String printCommentLOC(ResultData data, int length) {
     return String.join(
-            "",
-            Collections.nCopies(
-                Math.max(length - String.valueOf(data.commentLOC).length(), 0), " "))
+        "",
+        Collections.nCopies(
+            Math.max(length - String.valueOf(data.commentLOC).length(), 0), " "))
         + data.commentLOC;
   }
 
   public String printNumMethodLOC(ResultData data, int length) {
     return String.join(
-            "",
-            Collections.nCopies(Math.max(length - String.valueOf(data.numMethod).length(), 0), " "))
+        "",
+        Collections.nCopies(Math.max(length - String.valueOf(data.numMethod).length(), 0), " "))
         + data.numMethod;
   }
 
   public String printNImportsLOC(ResultData data, int length) {
     return String.join(
-            "",
-            Collections.nCopies(Math.max(length - String.valueOf(data.nImports).length(), 0), " "))
+        "",
+        Collections.nCopies(Math.max(length - String.valueOf(data.nImports).length(), 0), " "))
         + data.nImports;
   }
 }
