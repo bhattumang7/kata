@@ -28,9 +28,7 @@ public class JavaAnalyzer implements Analyzer {
           LoC += 1;
           if (line.trim().startsWith("import")) {
             imports += 1;
-          } else if (line.trim().startsWith("//")
-              || line.trim().startsWith("*")
-              || line.trim().startsWith("/*")) {
+          } else if (isCommentLine(line)) {
             commentsLoC += 1;
           }
         }
@@ -42,5 +40,11 @@ public class JavaAnalyzer implements Analyzer {
     } else {
       return null;
     }
+  }
+
+  private static boolean isCommentLine(String line) {
+    return line.trim().startsWith("//")
+        || line.trim().startsWith("*")
+        || line.trim().startsWith("/*");
   }
 }
