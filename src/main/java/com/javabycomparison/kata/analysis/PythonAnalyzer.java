@@ -18,6 +18,7 @@ public class PythonAnalyzer implements Analyzer {
   }
 
   private static boolean isAFunctionDeclarationLine(String line) {
+    // In Python a method is defined with 'def'
     return line.trim().startsWith("def");
   }
 
@@ -39,7 +40,7 @@ public class PythonAnalyzer implements Analyzer {
         number_of_imports += 1;
       } else if (isACommentLine(line)) {
         comment_lines_of_code += 1;
-        // In Python a method is defined with 'def'
+
       } else if (isAFunctionDeclarationLine(line)) {
         number_of_methods += 1;
       }
