@@ -48,29 +48,29 @@ public class ResultDataPrinter {
 
   public String printLOC(ResultData data, int length) {
     return String.join(
-        "", Collections.nCopies(Math.max(length - String.valueOf(data.LOC).length(), 0), " "))
+            "", Collections.nCopies(Math.max(length - String.valueOf(data.LOC).length(), 0), " "))
         + data.LOC;
   }
 
   public String printCommentLOC(ResultData data, int length) {
     return String.join(
-        "",
-        Collections.nCopies(
-            Math.max(length - String.valueOf(data.commentLOC).length(), 0), " "))
+            "",
+            Collections.nCopies(
+                Math.max(length - String.valueOf(data.commentLOC).length(), 0), " "))
         + data.commentLOC;
   }
 
   public String printNumMethodLOC(ResultData data, int length) {
     return String.join(
-        "",
-        Collections.nCopies(Math.max(length - String.valueOf(data.numMethod).length(), 0), " "))
+            "",
+            Collections.nCopies(Math.max(length - String.valueOf(data.numMethod).length(), 0), " "))
         + data.numMethod;
   }
 
   public String printNImportsLOC(ResultData data, int length) {
     return String.join(
-        "",
-        Collections.nCopies(Math.max(length - String.valueOf(data.nImports).length(), 0), " "))
+            "",
+            Collections.nCopies(Math.max(length - String.valueOf(data.nImports).length(), 0), " "))
         + data.nImports;
   }
 }
