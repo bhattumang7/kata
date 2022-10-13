@@ -6,10 +6,23 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class PythonAnalyzer implements Analyzer {
+
   private final Path file;
 
   public PythonAnalyzer(Path file) {
     this.file = file;
+  }
+
+  private static boolean isAnImportLine(String line) {
+    return line.trim().startsWith("import") || line.trim().startsWith("from");
+  }
+
+  private static boolean isAFunctionDeclarationLine(String line) {
+    return line.trim().startsWith("def");
+  }
+
+  private static boolean isACommentLine(String line) {
+    return line.trim().startsWith("#");
   }
 
   @Override
@@ -22,16 +35,12 @@ public class PythonAnalyzer implements Analyzer {
     List<String> file_contents = Files.readAllLines(this.file);
     for (String line : file_contents) {
       lines_of_code += 1;
-      if (line.trim().startsWith("import")) {
+      if (isAnImportLine(line)) {
         number_of_imports += 1;
-      }
-      if (line.trim().startsWith("from")) {
-        number_of_imports += 1;
-        // In Python a comment starts with '#'
-      } else if (line.trim().startsWith("#")) {
+      } else if (isACommentLine(line)) {
         comment_lines_of_code += 1;
         // In Python a method is defined with 'def'
-      } else if (line.trim().startsWith("def")) {
+      } else if (isAFunctionDeclarationLine(line)) {
         number_of_methods += 1;
       }
     }
