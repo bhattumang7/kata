@@ -5,6 +5,7 @@ import com.javabycomparison.kata.analysis.ResultDataPrinter;
 import java.util.Collections;
 
 public class ResultPrinter {
+
   // These are the Strings of the metrics
   private static final String FILE_NAME = "File Name";
   private static final String LANGUAGE = "  Language";
@@ -90,8 +91,8 @@ public class ResultPrinter {
   }
 
   private static int calculateLanguageLength(ResultData r1, ResultData r2) {
-    String languageR1 = (r1.type == 0) == true ? "Java" : "Python";
-    String languageR2 = (r2.type == 0) == true ? "Java" : "Python";
+    String languageR1 = (r1.type == 0) ? "Java" : "Python";
+    String languageR2 = (r2.type == 0) ? "Java" : "Python";
 
     // returns the length of the longest string of the three
     return Math.max(Math.max(languageR1.length(), languageR2.length()), LANGUAGE.length());
