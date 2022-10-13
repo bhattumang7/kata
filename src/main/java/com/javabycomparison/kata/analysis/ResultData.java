@@ -20,7 +20,16 @@ public class ResultData {
     this.nImports = nImports;
   }
 
-  public ResultData() {
+  public ResultData() {}
+
+  public boolean equals(ResultData otherObject) {
+    return type == otherObject.type
+        && L == otherObject.L
+        && LOC == otherObject.LOC
+        && commentLOC == otherObject.commentLOC
+        && numMethod == otherObject.numMethod
+        && nImports == otherObject.nImports
+        && name.equals(otherObject.name);
   }
 
   @Override
@@ -33,13 +42,7 @@ public class ResultData {
       return false;
     }
     ResultData that = (ResultData) o;
-    return type == that.type
-        && L == that.L
-        && LOC == that.LOC
-        && commentLOC == that.commentLOC
-        && numMethod == that.numMethod
-        && nImports == that.nImports
-        && name.equals(that.name);
+    return this.equals(that);
   }
 
   @Override
