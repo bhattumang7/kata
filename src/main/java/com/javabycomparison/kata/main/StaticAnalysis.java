@@ -6,6 +6,8 @@ import com.javabycomparison.kata.printing.CSVPrinter;
 import com.javabycomparison.kata.printing.ResultPrinter;
 import com.javabycomparison.kata.search.SearchClient;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.LinkedList;
 
 public class StaticAnalysis {
@@ -14,19 +16,28 @@ public class StaticAnalysis {
     analyze(args.length == 0 ? null : args[0], args.length == 2 ? args[1].equals("smry") : false);
   }
 
-  private static void analyze(String p, boolean smry) {
+  private static void analyze(String path, boolean smry) {
     StaticAnalysis analyzer = new StaticAnalysis();
-    ResultData[] overallResult = analyzer.run(p == null ? "./src/" : p, smry);
-    if (overallResult != null) {
-      ResultPrinter.printOverallResults(overallResult);
-      try {
-        new CSVPrinter("output.csv").writeCSV(overallResult);
-      } catch (IOException e) {
-        System.err.println("Something went a bit wrong");
-      }
-    } else {
-      System.err.println("Something went terribly wrong");
+    ResultData[] overallResult = analyzer.run(getDefaultIfNull(path), smry);
+
+    if (overallResult == null) {
+      System.err.println("overall result is null from static analysis");
     }
+
+    ResultPrinter.printOverallResults(overallResult);
+    try {
+      new CSVPrinter("output.csv").writeCSV(overallResult);
+    } catch (IOException e) {
+      System.err.println("Something went a bit wrong");
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      String exceptionAsString = sw.toString();
+      System.err.println(e.getMessage() + " " + exceptionAsString);
+    }
+  }
+
+  private static String getDefaultIfNull(String path) {
+    return path == null ? "./src/" : path;
   }
 
   private ResultData[] run(String directoryPath, boolean smry) {
